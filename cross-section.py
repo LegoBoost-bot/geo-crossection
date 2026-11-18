@@ -17,7 +17,7 @@ __generated_with = "0.25.2"
 app = marimo.App(width="medium")
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     z = mo.ui.slider(1, 18, debounce=True, value=10)
     x = mo.ui.number(debounce=True, value=611)
@@ -31,7 +31,7 @@ def _(mo):
     return x, y, z
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(x, y, z):
     X, Y, Z = x.value, y.value, z.value
     return X, Y, Z
@@ -66,14 +66,14 @@ def _(BytesIO, Image, mo, np, requests):
     return get_image, get_tile
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     background_map = mo.ui.dropdown({'relief': 'relief', 'OpenTopoMap': 'https://tile.opentopomap.org/{}/{}/{}.png'}, value='relief')
     background_map
     return (background_map,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(X, Y, Z, background_map, get_image, get_tile, plt):
     tile = get_tile(X, Y, Z)
     _shp = tile.shape
@@ -91,7 +91,7 @@ def _(X, Y, Z, background_map, get_image, get_tile, plt):
     return draw_with_line, tile
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(ChartPuck, draw_with_line, mo, tile):
     _shp = tile.shape
 
@@ -110,7 +110,7 @@ def _(ChartPuck, draw_with_line, mo, tile):
     return (puck,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(map_coordinates, np, plt, puck, tile):
     _QUALITY = 200
 
@@ -148,13 +148,13 @@ def _(BytesIO, Image, cross_section, mo):
     return (dl,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(cross_section, dl, mo, puck):
     mo.hstack([puck, mo.vstack([cross_section, dl])], align='center')
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _():
     import marimo as mo
     from wigglystuff import ChartPuck
@@ -162,7 +162,7 @@ def _():
     return ChartPuck, mo
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _():
     import numpy as np
     import requests
